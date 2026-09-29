@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 
     const chatCompletion = await groq.chat.completions.create({
       messages: [{ role: 'user', content: prompt }],
-      model: 'mixtral-8x7b-32768',
+      model: 'qwen/qwen3.8-27b',
       temperature: 0.1
     });
 

@@ -31,7 +31,7 @@ export async function POST(request: Request) {
         { role: 'system', content: SYSTEM_PROMPT },
         ...messages
       ],
-      model: 'mixtral-8x7b-32768',
+      model: 'qwen/qwen3.8-27b',
     });
 
     const reply = chatCompletion.choices[0]?.message?.content || 'I am having trouble understanding, could you repeat that?';

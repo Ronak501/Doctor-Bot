@@ -11,7 +11,8 @@ export async function POST(request: Request) {
 
     const sarvamFormData = new FormData();
     sarvamFormData.append('file', file);
-    sarvamFormData.append('model', 'saaras:v1');
+    sarvamFormData.append('model', 'saarika:v2.5');
+    sarvamFormData.append('language_code', 'en-IN');
 
     const response = await fetch('https://api.sarvam.ai/speech-to-text', {
       method: 'POST',
