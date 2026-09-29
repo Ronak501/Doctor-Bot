@@ -1,4 +1,4 @@
-import { NextResponse } from 'next';
+import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
@@ -16,21 +16,26 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         inputs: [text],
-        target_language_code: 'hi-IN', // Sarvam supports Indian languages, adjusting based on typical use
+        target_language_code: 'en-IN',
         speaker: 'meera',
         pitch: 0,
         pace: 1.0,
         loudness: 1.5,
         speech_sample_rate: 8000,
-        enable_preprocessing: true,
-        model: 'v2-vakyansh'
+        enable_preprocessing: true
       })
     });
 
-    const data = await response.json();
+    const textData = await response.text();
+    let data;
+    try {
+      data = JSON.parse(textData);
+    } catch (e) {
+      throw new Error(`Sarvam API Error: ${response.status} ${response.statusText} - ${textData}`);
+    }
     
     if (!response.ok) {
-      throw new Error(data.message || 'Failed to generate speech');
+      throw new Error(`Sarvam Rejected: ${JSON.stringify(data)}`);
     }
 
     return NextResponse.json({ success: true, audioBase64: data.audios[0] });

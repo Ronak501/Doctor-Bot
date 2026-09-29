@@ -9,20 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "groq-sdk": "latest",
+    "mongoose": "^8.0.0",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "mongoose": "^8.0.0",
-    "groq-sdk": "latest"
+    "react-dom": "latest"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "typescript": "latest",
-    "tailwindcss": "latest",
-    "@tailwindcss/postcss": "latest",
+    "autoprefixer": "latest",
     "postcss": "latest",
-    "autoprefixer": "latest"
+    "tailwindcss": "latest",
+    "typescript": "latest"
   }
 }

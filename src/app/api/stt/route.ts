@@ -1,4 +1,4 @@
-import { NextResponse } from 'next';
+import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
@@ -21,10 +21,16 @@ export async function POST(request: Request) {
       body: sarvamFormData
     });
 
-    const data = await response.json();
+    const textData = await response.text();
+    let data;
+    try {
+      data = JSON.parse(textData);
+    } catch (e) {
+      throw new Error(`Sarvam API Error: ${response.status} ${response.statusText} - ${textData}`);
+    }
     
     if (!response.ok) {
-      throw new Error(data.message || 'Failed to transcribe speech');
+      throw new Error(`Sarvam Rejected: ${JSON.stringify(data)}`);
     }
 
     return NextResponse.json({ success: true, text: data.transcript });

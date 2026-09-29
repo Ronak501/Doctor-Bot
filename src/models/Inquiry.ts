@@ -22,6 +22,15 @@ const InquirySchema = new mongoose.Schema(
       type: String,
       required: [true, 'Please provide how long you have had this problem'],
     },
+    paymentStatus: {
+      type: String,
+      enum: ['Pending', 'Paid', 'Cancelled'],
+      default: 'Pending',
+    },
+    fee: {
+      type: Number,
+      default: 500, // Default consultation fee
+    }
   },
   { timestamps: true }
 );
