@@ -31,7 +31,7 @@ export async function POST(request: Request) {
         { role: 'system', content: SYSTEM_PROMPT },
         ...messages
       ],
-      model: 'llama3-8b-8192',
+      model: 'mixtral-8x7b-32768',
     });
 
     const reply = chatCompletion.choices[0]?.message?.content || 'I am having trouble understanding, could you repeat that?';
