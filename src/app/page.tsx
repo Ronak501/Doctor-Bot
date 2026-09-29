@@ -25,6 +25,7 @@ export default function Home() {
   const [isRecording, setIsRecording] = useState(false);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
+  const hasSpokenWelcomeRef = useRef(false);
 
   // Scroll chat to bottom
   useEffect(() => {
@@ -33,10 +34,11 @@ export default function Home() {
 
   // Initial welcome voice
   useEffect(() => {
-    if (activeTab === 'patient' && messages.length === 1) {
+    if (activeTab === 'patient' && messages.length === 1 && !hasSpokenWelcomeRef.current) {
+      hasSpokenWelcomeRef.current = true;
       playTTS(messages[0].content);
     }
-  }, [activeTab]);
+  }, [activeTab, messages.length]);
 
   const playTTS = async (text: string) => {
     try {
